@@ -1,0 +1,40 @@
+{
+	"name": "@ycastor/kalah-client",
+	"version": "1.0.0",
+	"description": "Typescript client for the Bol Kalah implementation",
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"es2015": "./dist/index.js",
+	"typings": "./dist/index.d.ts",
+	"directories": {
+		"doc": "docs"
+	},
+	"scripts": {
+		"build": "ngc",
+		"build:watch": "npm run clean:dist && ngc -w",
+		"clean:dist": "rimraf dist",
+		"prepack": "npm run build"
+	},
+	"author": "Ygor Castor",
+	"license": "GPLv3",
+	"homepage": "",
+	"peerDependencies": {
+		"@angular/common": "^8.1.1",
+		"@angular/compiler": "^8.1.1",
+		"rxjs": "^6.5.2",
+		"zone.js": "^0.9.1",
+		"@angular/core": "^8.1.1"
+	},
+	"devDependencies": {
+		"@angular/common": "^8.1.1",
+		"@angular/compiler": "^8.1.1",
+		"@angular/core": "^8.1.1",
+		"@angular/compiler-cli": "^8.0.2",
+		"@angular/cli": "^8.0.6",
+		"rimraf": "^2.6.3",
+		"rxjs": "^6.5.2",
+		"typescript": "~3.4.5",
+		"zone.js": "^0.9.1"
+	}
+}
+

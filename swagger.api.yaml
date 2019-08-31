@@ -1,0 +1,189 @@
+openapi: 3.0.1
+info:
+  title: Bol Kalah
+  description: The Kalah Game for Bol Assessment
+  contact:
+    name: Ygor Castor
+    url: https://github.com/ygorcastor
+    email: ygorcastor@gmail.com
+  license:
+    name: GPLv3
+    url: http://foo.bar
+  version: 1.0.0
+security: []
+servers:
+  - url: "http://localhost:8080"
+paths:
+  /api/game:
+    post:
+      tags:
+        - GameApi
+      summary: Creates a new Kalah Game
+      description: A new Kalah Game with the informed players is created
+      operationId: newGame
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGameCommand'
+        required: true
+      responses:
+        201:
+          description: Returns the new game
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        400:
+          description: Invalid command supplied
+        500:
+          description: There was an failure at the creation of the game
+  /api/game/{sessionId}:
+    get:
+      tags:
+        - GameApi
+      summary: Find a Kalah game by the session
+      description: Find an ongoin kalah game
+      operationId: findGameBySession
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            minLength: 1
+            type: string
+      responses:
+        200:
+          description: Returns the found session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        400:
+          description: Invalid session supplied
+        404:
+          description: No game with this session was found
+        500:
+          description: There was an failure while searching the game
+  /api/game/{sessionId}/play:
+    post:
+      tags:
+        - GameApi
+      summary: Make an game movement
+      description: Makes an game movement and returns the new game state
+      operationId: makePlay
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            minLength: 1
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Action'
+        required: true
+      responses:
+        200:
+          description: Returns the new GameState
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameState'
+        400:
+          description: Invalid request
+        404:
+          description: No game with this session was found
+        500:
+          description: There was an failure while executing the movement
+components:
+  schemas:
+    Session:
+      type: object
+      properties:
+        sessionId:
+          type: string
+          description: Gets session id.
+        game:
+          $ref: '#/components/schemas/Game'
+    Game:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/GameState'
+    GameState:
+      type: object
+      properties:
+        board:
+          $ref: '#/components/schemas/Board'
+        currentPlayer:
+          $ref: '#/components/schemas/Player'
+        currentIndex:
+          type: integer
+          description: ""
+          format: int32
+        remainingPieces:
+          type: integer
+          description: ""
+          format: int32
+        currentPit:
+          $ref: '#/components/schemas/Pit'
+        currentTurn:
+          $ref: '#/components/schemas/Turn'
+        currentVictory:
+          $ref: '#/components/schemas/VictoryState'
+    Board:
+      type: object
+      properties:
+        pits:
+          type: array
+          description: Lists all the pits from the board
+          items:
+            $ref: '#/components/schemas/Pit'
+    Pit:
+      type: object
+      properties:
+        pieces:
+          type: integer
+          description: ""
+          format: int32
+        player:
+          $ref: '#/components/schemas/Player'
+        store:
+          type: boolean
+          description: ""
+    Player:
+      type: object
+      properties:
+        name:
+          type: string
+    Turn:
+      type: string
+      enum:
+        - PLAYER1
+        - PLAYER2
+    VictoryState:
+      type: string
+      enum:
+        - ONGOING
+        - PLAYER1
+        - PLAYER2
+    NewGameCommand:
+      type: object
+      properties:
+        firstPlayer:
+          $ref: '#/components/schemas/Player'
+        secondPlayer:
+          $ref: '#/components/schemas/Player'
+    Action:
+      type: object
+      properties:
+        player:
+          $ref: '#/components/schemas/Player'
+        pitIndex:
+          minimum: 0
+          type: integer
+          format: int32

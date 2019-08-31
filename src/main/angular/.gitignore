@@ -1,0 +1,41 @@
+wwwroot/*.js
+node_modules
+typings
+dist
+.swagger-codegen/
+
+# Arquivos auto gerados
+model
+api
+api.module.ts
+configuration.ts
+encoder.ts
+variables.ts
+
+# Node
+npm-debug.log
+
+# Yarn
+yarn-error.log
+
+# JetBrains
+.idea/
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Mac
+.DS_Store
+
+# Temporary files
+coverage/
+demo/
+docs
+tmp
+
+# Library files
+src/
