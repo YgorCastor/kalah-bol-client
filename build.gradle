@@ -6,7 +6,6 @@ buildscript {
 
 plugins {
 	id 'java'
-	id 'groovy'
 	id 'maven'
 	id 'net.researchgate.release' version '2.7.0'
 }
@@ -74,25 +73,7 @@ task generateSwaggerCodeAngular(type: org.openapitools.generator.gradle.plugin.t
 	outputDir = "$project.projectDir.path/src/main/angular".toString()
 }
 
-task generateSwaggerCodeJava(type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask, group: 'build') {
-	generatorName = "java"
-	inputSpec = "swagger.api.yaml"
-	skipValidateSpec = true
-
-	additionalProperties = [
-		modelPackage           : "kalah.bol.client.domain",
-		apiPackage             : "kalah.bol.client.api",
-		invokerPackage         : "kalah.bol.client",
-		groupId                : "kalah.bol",
-		artifactId             : "kalah-client",
-		dateLibrary            : "joda",
-		library                : "jersey2",
-		hideGenerationTimestamp: "true",
-	]
-	outputDir = project.projectDir.path
-}
-
-task generateSwaggerCode(dependsOn: ['generateSwaggerCodeAngular', 'generateSwaggerCodeJava'], group: 'build')
+task generateSwaggerCode(dependsOn: ['generateSwaggerCodeAngular'], group: 'build')
 
 compileJava.dependsOn generateSwaggerCode
 

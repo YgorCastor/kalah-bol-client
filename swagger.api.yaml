@@ -17,7 +17,7 @@ paths:
   /api/game:
     post:
       tags:
-        - GameApi
+        - Game
       summary: Creates a new Kalah Game
       description: A new Kalah Game with the informed players is created
       operationId: newGame
@@ -42,7 +42,7 @@ paths:
   /api/game/{sessionId}:
     get:
       tags:
-        - GameApi
+        - Game
       summary: Find a Kalah game by the session
       description: Find an ongoin kalah game
       operationId: findGameBySession
@@ -69,7 +69,7 @@ paths:
   /api/game/{sessionId}/play:
     post:
       tags:
-        - GameApi
+        - Game
       summary: Make an game movement
       description: Makes an game movement and returns the new game state
       operationId: makePlay

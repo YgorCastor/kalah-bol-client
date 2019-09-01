@@ -1,5 +1,6 @@
 .DS_Store
 src/main/java/*
+.idea
 .gradle
 # Logs
 logs
