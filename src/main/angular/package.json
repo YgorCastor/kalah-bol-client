@@ -19,22 +19,21 @@
 	"license": "GPLv3",
 	"homepage": "",
 	"peerDependencies": {
-		"@angular/common": "^8.1.1",
-		"@angular/compiler": "^8.1.1",
+		"@angular/common": "~8.2.4",
+		"@angular/compiler": "~8.2.4",
+		"@angular/core": "~8.2.4",
 		"rxjs": "^6.5.2",
-		"zone.js": "^0.9.1",
-		"@angular/core": "^8.1.1"
+		"zone.js": "^0.9.1"
 	},
 	"devDependencies": {
-		"@angular/common": "^8.1.1",
-		"@angular/compiler": "^8.1.1",
-		"@angular/core": "^8.1.1",
-		"@angular/compiler-cli": "^8.0.2",
-		"@angular/cli": "^8.0.6",
+		"@angular/common": "~8.2.4",
+		"@angular/compiler": "~8.2.4",
+		"@angular/core": "~8.2.4",
+		"@angular/cli": "~8.3.2",
+		"@angular/compiler-cli": "~8.2.4",
 		"rimraf": "^2.6.3",
 		"rxjs": "^6.5.2",
 		"typescript": "~3.4.5",
 		"zone.js": "^0.9.1"
 	}
 }
-
